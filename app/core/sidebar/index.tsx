@@ -62,7 +62,7 @@ export function GoalsSidebar() {
 
 function Divid({ label }: { label: string }) {
   return (
-    <div className="py-10 flex items-center space-x-4">
+    <div className="py-4 flex items-center space-x-4">
       <h1 className="text-sm font-semibold">{label}</h1>
       <div className="h-px flex-1 bg-white/10"></div>
     </div>
