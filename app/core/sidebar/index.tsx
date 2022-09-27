@@ -1,4 +1,4 @@
-import { NavLink } from '@remix-run/react'
+import { NavLink, useLocation } from '@remix-run/react'
 
 export function Sidebar() {
   return (
@@ -74,14 +74,16 @@ interface ItemProps {
   children: React.ReactNode
 }
 function Item({ to, children }: ItemProps) {
+  const location = useLocation()
+
   return (
     <NavLink
       to={to}
-      className={({ isActive }) =>
-        `py-2 text-gray-400 hover:text-black hover:dark:text-white duration-200 ${
-          isActive ? 'font-semibold text-black dark:text-white' : 'font-normal'
-        }`
-      }
+      className={`py-2 text-gray-400 hover:text-black hover:dark:text-white duration-200 ${
+        location.pathname === to
+          ? 'font-semibold text-black dark:text-white'
+          : 'font-normal'
+      }`}
     >
       {children}
     </NavLink>
