@@ -1,3 +1,4 @@
+import { Links, Meta, Scripts, useCatch } from '@remix-run/react'
 import { Top, Main, Sidebar } from '~/core'
 export default function Index() {
   return (
@@ -34,6 +35,15 @@ function Divid({ label }: { label: string }) {
     </div>
   )
 }
+
+interface CardProps {
+  label: string
+  when: string
+  description: string
+  link?: string
+  done?: boolean
+}
+
 function Card() {
   return (
     <div className="text-sm border dark:border-white/10 dark:bg-[#222] rounded-md p-6">

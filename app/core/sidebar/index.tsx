@@ -28,14 +28,14 @@ export function Sidebar() {
         />
       </div>
       <div className="w-1/5 hidden lg:flex flex-col text-sm">
-        <Item to="/still">October</Item>
-        <Item to="/">November</Item>
-        <Item to="/still">Beta Features</Item>
-        <Item to="/still">Integrations</Item>
-        <Item to="/still">Members</Item>
-        <Item to="/still">Service Tokens</Item>
-        <Item to="/still">Teams</Item>
-        <Item to="/still">Usage and Billing</Item>
+        <Item to="/october-22">October 2022</Item>
+        <Item to="/november-22">November</Item>
+        <Item to="/nil">Beta Features</Item>
+        <Item to="/nil">Integrations</Item>
+        <Item to="/nil">Members</Item>
+        <Item to="/nil">Service Tokens</Item>
+        <Item to="/nil">Teams</Item>
+        <Item to="/nil">Usage and Billing</Item>
       </div>
     </>
   )

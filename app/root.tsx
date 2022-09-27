@@ -6,7 +6,9 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useCatch,
 } from '@remix-run/react'
+import { Top } from './core'
 import styles from './styles/app.css'
 
 export const meta: MetaFunction = () => ({
@@ -31,6 +33,32 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+      </body>
+    </html>
+  )
+}
+
+export function CatchBoundary() {
+  const caught = useCatch()
+  return (
+    <html>
+      <head>
+        <title>Oops!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body className="dark">
+        <div className="bg-white dark:bg-dark-lot min-h-screen">
+          <Top />
+          <div className="w-full fixed top-0 h-screen grid place-content-center">
+            <h1 className="text-[#999] font-semibold text-lg flex items-center space-x-4">
+              <span>{caught.status}</span>
+              <div className="h-px bg-white/10 w-10"></div>
+              <span>{caught.statusText}</span>
+            </h1>
+          </div>
+        </div>
+        <Scripts />
       </body>
     </html>
   )
