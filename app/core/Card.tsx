@@ -27,20 +27,20 @@ export function Skeleton() {
       <div className="animate-pulse flex space-x-4">
         <div className="flex-1 space-y-4 py-1">
           <div
-            className="h-4 bg-gray-400 rounded"
+            className="h-4 bg-[#444] rounded"
             style={{
               width: `${random(30, 90)}%`,
             }}
           ></div>
           <div className="flex items-center space-x-2">
             <div
-              className="h-4 bg-gray-400 rounded"
+              className="h-4 bg-[#444] rounded"
               style={{
                 width: `${random(20, 30)}%`,
               }}
             ></div>
             <div
-              className="h-4 bg-gray-400 rounded"
+              className="h-4 bg-[#444] rounded"
               style={{
                 width: `${random(20, 30)}%`,
               }}
@@ -48,13 +48,13 @@ export function Skeleton() {
           </div>
           <div className="space-y-2">
             <div
-              className="h-4 bg-gray-400 rounded"
+              className="h-4 bg-[#444] rounded"
               style={{
                 width: `${random(80, 100)}%`,
               }}
             ></div>
             <div
-              className="h-4 bg-gray-400 rounded"
+              className="h-4 bg-[#444] rounded"
               style={{
                 width: `${random(40, 90)}%`,
               }}
@@ -63,7 +63,7 @@ export function Skeleton() {
 
           <div className="flex items-center justify-end space-x-2">
             <div
-              className="h-4 bg-gray-400 rounded"
+              className="h-4 bg-[#444] rounded"
               style={{
                 width: `${random(20, 30)}%`,
               }}
