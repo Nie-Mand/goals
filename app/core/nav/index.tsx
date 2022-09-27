@@ -7,8 +7,10 @@ export function Top() {
       <Nav />
 
       <Menu>
-        <Menu.Item to="/">Overview</Menu.Item>
-        <Menu.Item to="/events">Events and Dates</Menu.Item>
+        <Menu.Item to="/">All</Menu.Item>
+        <Menu.Item to="/events">Events</Menu.Item>
+        <Menu.Item to="/todos">Todos</Menu.Item>
+        <Menu.Item to="/goals">Goals</Menu.Item>
       </Menu>
     </div>
   )

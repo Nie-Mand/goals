@@ -1,6 +1,13 @@
 import { type LoaderFunction } from '@remix-run/node'
-import { Top, Main, Sidebar, Card, type Goal, Skeleton } from '~/core'
-import { getAll } from '~/service'
+import {
+  Top,
+  Main,
+  GoalsSidebar as Sidebar,
+  Card,
+  type Goal,
+  Skeleton,
+} from '~/core'
+import { getGoals } from '~/service'
 import { useLoaderData, useTransition } from '@remix-run/react'
 
 export default function Index() {
@@ -49,7 +56,7 @@ export default function Index() {
                     <span className="text-xs">🤷‍♂️</span>
                   </h1>
                 </div>
-              )}{' '}
+              )}
             </>
           )}
         </div>
@@ -68,7 +75,7 @@ function Divid({ label }: { label: string }) {
 }
 
 export const loader: LoaderFunction = async () => {
-  const goals = await getAll()
+  const goals = await getGoals()
   const done = goals.filter(goal => goal.done)
   const ongoing = goals.filter(goal => !goal.done)
 

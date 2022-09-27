@@ -34,7 +34,8 @@ function Options({ options }: { options: Option[] }) {
                 text-sm rounded-sm dark:text-white text-gray-600 flex items-center px-8 h-9 relative select-none
                 outline-none focus:outline-none cursor-pointer hover:bg-gray-100 hover:dark:bg-[#444] duration-200
                 `}
-          onClick={option.onClick}
+          onClick={() => console.log('option', option)}
+          onSelect={() => console.log('SELECTED')}
         >
           <RadixSelect.ItemText>{option.label}</RadixSelect.ItemText>
           <RadixSelect.ItemIndicator

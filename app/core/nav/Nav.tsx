@@ -10,7 +10,7 @@ export default function Nav() {
         {' '}
       </Link>
 
-      <Link to="/xyz" className="font-medium  text-black dark:text-text-white">
+      <Link to="/" className="font-medium  text-black dark:text-text-white">
         Niemands-goals
       </Link>
 
