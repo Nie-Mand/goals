@@ -39,6 +39,11 @@ export async function getGoalsBy(section: string) {
   return data
 }
 
+export async function create(payload: any) {
+  const { error } = await supabase.from('goals').insert([payload])
+  return error ? error.message : null
+}
+
 export async function getEvents() {
   const { data, error } = await supabase
     .from('goals')

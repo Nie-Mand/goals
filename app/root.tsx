@@ -1,4 +1,4 @@
-import type { MetaFunction } from '@remix-run/node'
+import type { LoaderFunction, MetaFunction } from '@remix-run/node'
 import {
   Links,
   LiveReload,
@@ -10,6 +10,7 @@ import {
   useLoaderData,
 } from '@remix-run/react'
 import { Top } from './core'
+import { AuthProvider } from './service/auth'
 import styles from './styles/app.css'
 
 export const meta: MetaFunction = () => ({
@@ -23,6 +24,7 @@ export function links() {
 }
 
 export default function App() {
+  const data = useLoaderData()
   return (
     <html lang="en">
       <head>
@@ -30,7 +32,9 @@ export default function App() {
         <Links />
       </head>
       <body className="dark">
-        <Outlet />
+        <AuthProvider surl={data.url} skey={data.key}>
+          <Outlet />
+        </AuthProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
@@ -41,6 +45,8 @@ export default function App() {
 
 export function CatchBoundary() {
   const caught = useCatch()
+  const data = useLoaderData()
+
   return (
     <html>
       <head>
@@ -49,25 +55,30 @@ export function CatchBoundary() {
         <Links />
       </head>
       <body className="dark">
-        <div className="bg-white dark:bg-dark-lot min-h-screen">
-          <Top />
-          <div className="w-full fixed top-0 h-screen grid place-content-center">
-            <h1 className="text-[#999] font-semibold text-lg flex items-center space-x-4">
-              <span>{caught.status}</span>
-              <div className="h-px bg-white/10 w-10"></div>
-              <span>{caught.statusText}</span>
-            </h1>
+        <AuthProvider surl={data.url} skey={data.key}>
+          <div className="bg-white dark:bg-dark-lot min-h-screen">
+            <Top />
+            <div className="w-full fixed top-0 h-screen grid place-content-center">
+              <h1 className="text-[#999] font-semibold text-lg flex items-center space-x-4">
+                <span>{caught.status}</span>
+                <div className="h-px bg-white/10 w-10"></div>
+                <span>{caught.statusText}</span>
+              </h1>
+            </div>
           </div>
-        </div>
+        </AuthProvider>
         <Scripts />
       </body>
     </html>
   )
 }
 
-export const loader = () => {
+export const loader: LoaderFunction = () => {
+  const url = process.env.SUPABASE_URL || ''
+  const key = process.env.SUPABASE_PUBLIC_ANON || ''
+
   return {
-    supabaseKey: process.env.SUPABASE_ANON_KEY,
-    supabaseUrl: process.env.SUPABASE_URL,
+    url,
+    key,
   }
 }

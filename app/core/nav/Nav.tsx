@@ -1,6 +1,9 @@
 import { Link } from '@remix-run/react'
+import { useAuthenticate } from '~/service/auth'
 
 export default function Nav() {
+  const { user, loading, logout } = useAuthenticate()
+
   return (
     <nav className="flex items-center space-x-3 pt-6 lg:pt-8 pb-2 contained">
       <Link
@@ -16,12 +19,23 @@ export default function Nav() {
 
       <div className="flex-1"></div>
 
-      <Link
-        to="/login"
-        className="px-3 py-2 rounded-md bg-gradient-to-r hover:opacity-80 duration-200 from-red-500 via-red-600 to-red-700 text-white text-xs font-semibold"
-      >
-        Login
-      </Link>
+      {loading === false && user && (
+        <button
+          onClick={logout}
+          className="px-3 py-2 rounded-md bg-gradient-to-r hover:opacity-80 duration-200 from-red-500 via-red-600 to-red-700 text-white text-xs font-semibold"
+        >
+          Logout
+        </button>
+      )}
+
+      {loading === false && !user && (
+        <Link
+          to="/login"
+          className="px-3 py-2 rounded-md bg-gradient-to-r hover:opacity-80 duration-200 from-red-500 via-red-600 to-red-700 text-white text-xs font-semibold"
+        >
+          Login
+        </Link>
+      )}
 
       {/* <Dropdown
         contentClassName="relative top-12 right-4 sm:right-10 lg:right-14 xl:right-[7.5rem]"

@@ -1,13 +1,12 @@
 import { type LoaderFunction } from '@remix-run/node'
 import { Top, Main, Sidebar, Card, type Goal, Skeleton } from '~/core'
-import { getAll, current, login } from '~/service'
+import { getAll, current } from '~/service'
+
 import { useLoaderData, useTransition } from '@remix-run/react'
 
 export default function Index() {
-  const { done, ongoing, user } = useLoaderData()
+  const { done, ongoing } = useLoaderData()
   const transition = useTransition()
-
-  console.log(user)
 
   return (
     <div className="bg-white dark:bg-dark-lot min-h-screen">

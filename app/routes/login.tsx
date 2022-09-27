@@ -1,38 +1,20 @@
-import { ActionFunction, type LoaderFunction } from '@remix-run/node'
 import { Top, Main } from '~/core'
-import { getAll, current, login, supabase } from '~/service'
-import { useLoaderData, useActionData } from '@remix-run/react'
-
-export const action: ActionFunction = async ({ request }) => {
-  const data = await request.formData()
-  const { user, session, error } = await login(
-    data.get('email')?.toString() || '',
-    data.get('password')?.toString() || ''
-  )
-  console.log(user, session, error)
-  if (error) {
-    return {
-      error: error.message,
-    }
-  }
-
-  return {}
-}
+import { useAuthenticate } from '~/service/auth'
 
 export default function Index() {
-  const { done, ongoing, user } = useLoaderData()
+  const { login, loginError: error } = useAuthenticate()
 
-  const action = useActionData()
-  console.log({ action })
-
-  const error = null
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    login(e.currentTarget.email.value, e.currentTarget.password.value)
+  }
 
   return (
     <div className="bg-white dark:bg-dark-lot min-h-screen">
       <Top />
       <Main className="flex flex-col lg:flex-row items-start space-y-3 lg:space-x-3 text-black dark:text-text-white">
         <div className="flex-1 w-full lg:w-auto">
-          <form method="post" className="grid gap-4">
+          <form method="post" className="grid gap-4" onSubmit={onSubmit}>
             <label htmlFor="email" className="grid gap-2">
               <span className="font-semibold text-sm">Email:</span>
               <input
@@ -55,9 +37,7 @@ export default function Index() {
               />
             </label>
             <div>
-              {action && action.error && (
-                <div className="text-red-500 text-xs">{action.error}</div>
-              )}
+              {error && <div className="text-red-500 text-xs">{error}</div>}
             </div>
             <div className="flex justify-end">
               <button
@@ -72,18 +52,4 @@ export default function Index() {
       </Main>
     </div>
   )
-}
-
-export const loader: LoaderFunction = async () => {
-  const goals = await getAll()
-  const done = goals.filter(goal => goal.done)
-  const ongoing = goals.filter(goal => !goal.done)
-
-  const user = await current()
-
-  return {
-    user,
-    done,
-    ongoing,
-  }
 }
