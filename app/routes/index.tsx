@@ -1,11 +1,13 @@
 import { type LoaderFunction } from '@remix-run/node'
 import { Top, Main, Sidebar, Card, type Goal, Skeleton } from '~/core'
-import { getAll } from '~/service'
+import { getAll, current, login } from '~/service'
 import { useLoaderData, useTransition } from '@remix-run/react'
 
 export default function Index() {
-  const { done, ongoing } = useLoaderData()
+  const { done, ongoing, user } = useLoaderData()
   const transition = useTransition()
+
+  console.log(user)
 
   return (
     <div className="bg-white dark:bg-dark-lot min-h-screen">
@@ -72,7 +74,10 @@ export const loader: LoaderFunction = async () => {
   const done = goals.filter(goal => goal.done)
   const ongoing = goals.filter(goal => !goal.done)
 
+  const user = await current()
+
   return {
+    user,
     done,
     ongoing,
   }

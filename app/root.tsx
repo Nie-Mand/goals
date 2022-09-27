@@ -7,6 +7,7 @@ import {
   Scripts,
   ScrollRestoration,
   useCatch,
+  useLoaderData,
 } from '@remix-run/react'
 import { Top } from './core'
 import styles from './styles/app.css'
@@ -62,4 +63,11 @@ export function CatchBoundary() {
       </body>
     </html>
   )
+}
+
+export const loader = () => {
+  return {
+    supabaseKey: process.env.SUPABASE_ANON_KEY,
+    supabaseUrl: process.env.SUPABASE_URL,
+  }
 }

@@ -16,6 +16,13 @@ export default function Nav() {
 
       <div className="flex-1"></div>
 
+      <Link
+        to="/login"
+        className="px-3 py-2 rounded-md bg-gradient-to-r hover:opacity-80 duration-200 from-red-500 via-red-600 to-red-700 text-white text-xs font-semibold"
+      >
+        Login
+      </Link>
+
       {/* <Dropdown
         contentClassName="relative top-12 right-4 sm:right-10 lg:right-14 xl:right-[7.5rem]"
         groupedOptions={[
